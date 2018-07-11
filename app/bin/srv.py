@@ -4,12 +4,13 @@ import re
 import requests
 import socket
 import time
+import sys
 
 import geoip2.database
 from geopy.geocoders import Nominatim
 import jinja2
 
-from gevent.wsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 from gevent.monkey import patch_all
 from gevent.subprocess import Popen, PIPE
 patch_all()
@@ -53,7 +54,7 @@ PLAIN_TEXT_AGENTS = [
 
 if not os.path.exists(os.path.dirname( LOG_FILE )):
     os.makedirs( os.path.dirname( LOG_FILE ) )
-logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 reader = geoip2.database.Reader(GEOLITE)
 geolocator = Nominatim()

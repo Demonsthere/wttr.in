@@ -1,0 +1,15 @@
+---
+version: '3'
+services:
+  app:
+    build: 'app'
+    environment:
+      WTTR_MYDIR: "/opt/wttr.in"
+      WTTR_GEOLITE: "/opt/GeoLite/GeoLite2-City.mmdb"
+      WTTR_WEGO: "/root/go/bin/wego"
+      WTTR_LISTEN_HOST: "0.0.0.0"
+      WTTR_LISTEN_PORT: "8002"
+    ports:
+      - "8002:8002"
+    volumes:
+      - "$PWD/data/.wegorc:/root/.wegorc"
